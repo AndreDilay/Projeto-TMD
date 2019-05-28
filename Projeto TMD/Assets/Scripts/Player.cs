@@ -8,6 +8,12 @@ public class Player : MonoBehaviour
     //Parâmetros de Confuguração
     [Header("Movimentação")]
     [SerializeField] float velocidade = 5f;
+    [Header("Esquiva")]
+    [SerializeField] float distanciaEsquiva = 5f;
+
+
+    //Para a esquiva
+    [SerializeField] Vector3 ultimaDirecao;
 
 
     //Referencias de prefabs
@@ -29,6 +35,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         Movimentacao();
+        Esquiva();
         OlharParaMouse();
     }
 
@@ -43,8 +50,21 @@ public class Player : MonoBehaviour
         //Calculo da movimentação
         rb2d.velocity = new Vector2(movimentoHorizontal * velocidade, rb2d.velocity.y);
         rb2d.velocity = new Vector2(rb2d.velocity.x, movimentoVertical * velocidade);
+        
+        //Lembrar a ultima direção (para a esquiva)
+        Vector2 direcaoMovimento = new Vector2(movimentoHorizontal, movimentoVertical).normalized;
+        ultimaDirecao = direcaoMovimento;
 
     }
+
+    private void Esquiva()
+    {
+        if (Input.GetButtonDown("Jump"))
+        {
+            transform.position += ultimaDirecao * distanciaEsquiva;
+        }
+    }
+
 
     private void OlharParaMouse()
     {

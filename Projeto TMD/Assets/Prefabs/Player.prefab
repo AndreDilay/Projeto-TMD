@@ -176,6 +176,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocidade: 5
+  distanciaEsquiva: 3
+  ultimaDirecao: {x: 0, y: 0, z: 0}
   armaPosicao: {fileID: 1844577463179383338}
 --- !u!50 &4177110561284363225
 Rigidbody2D:
